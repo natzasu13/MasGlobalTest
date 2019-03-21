@@ -8,28 +8,35 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace MasGlobalTest.UI.ApiController
+namespace MasGlobalTest.UI.ApiControllers
 {
-    public class EmployeeController : System.Web.Http.ApiController
+    public class GetEmployeeController : ApiController
     {
         private readonly EmployeeBusiness _employeeBusiness;
 
-        public EmployeeController()
+        public GetEmployeeController()
         {
             if (_employeeBusiness == null)
                 _employeeBusiness = new EmployeeBusiness();
         }
 
-        /// <summary>
-        /// List Employees
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [ActionName("EmployeeList")]
-        public List<EmployeeViewModel> EmployeeList(int id)
+        // GET: api/GetEmployee
+        public IEnumerable<string> Get()
         {
-            int inputId = 0;
-            IEnumerable<Employess> lData = _employeeBusiness.ConsumeApi(inputId);
+            return new string[] { "value1", "value2" };
+        }
+
+        // GET: api/GetEmployee/5
+        public string Get(int id)
+        {
+            return "value";
+        }
+
+        [HttpGet]
+        // GET: api/GetEmployee/List?idEmployee
+        public List<EmployeeViewModel> List(int idEmployee)
+        {
+            IEnumerable<Employess> lData = _employeeBusiness.ConsumeApi(idEmployee);
             List<EmployeeViewModel> model = new List<EmployeeViewModel>();
 
             if (lData != null)
@@ -52,6 +59,21 @@ namespace MasGlobalTest.UI.ApiController
 
             }
             return model.OrderBy(x => x.name).ToList();
+        }
+
+        // POST: api/GetEmployee
+        public void Post([FromBody]string value)
+        {
+        }
+
+        // PUT: api/GetEmployee/5
+        public void Put(int id, [FromBody]string value)
+        {
+        }
+
+        // DELETE: api/GetEmployee/5
+        public void Delete(int id)
+        {
         }
     }
 }

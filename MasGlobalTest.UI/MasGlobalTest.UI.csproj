@@ -15,7 +15,7 @@
     <AssemblyName>MasGlobalTest.UI</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -64,9 +64,28 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.2.0.20126.16343\lib\net40\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.Formatting.Extension.5.2.3.0\lib\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <HintPath>..\packages\System.Net.Http.Formatting.Extension.5.2.3.0\lib\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.Formatting.Extension.5.2.3.0\lib\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.2.0.20126.16343\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -154,15 +173,29 @@
       <HintPath>..\lib\KENDOUIMVC\2019.1.220.545.Trial\spreadsheet\binaries\net40\Telerik.Windows.Zip.Extensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Unity.Abstractions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Abstractions.4.1.1\lib\net46\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.10.0.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Container.5.10.0\lib\net46\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mvc, Version=5.10.0.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Mvc.5.10.0\lib\net46\Unity.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiController\EmployeeController.cs" />
+    <Compile Include="ApiControllers\GetEmployeeController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -191,7 +224,9 @@
     <Content Include="Scripts\kendo.modernizr.custom.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -280,7 +315,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>2116</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:2116/</IISUrl>
+          <IISUrl>http://localhost/MasGlobalTest.UI</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

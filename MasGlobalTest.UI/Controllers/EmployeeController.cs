@@ -17,6 +17,7 @@ namespace MasGlobalTest.UI.Controllers
         // GET: Employee/Details/5
         public ActionResult Details(int id)
         {
+
             return View();
         }
 

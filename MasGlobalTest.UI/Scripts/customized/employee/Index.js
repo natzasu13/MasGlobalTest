@@ -7,23 +7,19 @@
     function ConsultBtn_onClick() {
 
         idEmployee = document.getElementById("idEmployee").value;
+        if (idEmployee === "")
+            idEmployee = 0;
+
 
         var dataSourceConnection = new kendo.data.DataSource({
             transport: {
                 read: {
-                    url: rootUrl + "api/Employee/EmployeeList?id=" + idEmployee,
+                    url: rootUrl + "api/GetEmployee/List?idEmployee=" + idEmployee,
                     dataType: "json",
                     type: "GET",
                 },
             },
             batch: true,
-            //pageSize: 7,//Number of items per page for the page
-            //schema: {
-
-            //    total: "total",//here the total value of the records in the database for the handling of page is returned
-            //    data: "data"//Here the data to be displayed in the datagrid is returned
-            //},
-            //serverPaging: true,//We indicate to the pager that it takes the page data from the server
         });
 
         $("#gridEmployeeConsult").kendoGrid({
