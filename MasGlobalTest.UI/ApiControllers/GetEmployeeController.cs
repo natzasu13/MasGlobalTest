@@ -20,18 +20,6 @@ namespace MasGlobalTest.UI.ApiControllers
                 _employeeBusiness = new EmployeeBusiness();
         }
 
-        // GET: api/GetEmployee
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET: api/GetEmployee/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         [HttpGet]
         // GET: api/GetEmployee/List?idEmployee
         public List<EmployeeViewModel> List(int idEmployee)
@@ -44,36 +32,22 @@ namespace MasGlobalTest.UI.ApiControllers
                 foreach (var data in lData)
                 {
                     EmployeeViewModel viewModel = new EmployeeViewModel();
-                    //    viewModel.typeAccount = new typeAccount();
-                    //    viewModel.id = data.id;
-                    //    viewModel.dateCreate = data.dateCreate;
-                    //    viewModel.state = data.state;
-                    //    viewModel.description = data.description;
-                    //    viewModel.code = data.code;
-                    //    viewModel.longDescription = data.longDescription;
+                    viewModel.name = data.name;
+                    viewModel.monthlySalary = data.monthlySalary;
+                    viewModel.id = data.id;
+                    viewModel.roleDescription = data.roleDescription;
+                    viewModel.roleId = data.roleId;
+                    viewModel.roleName = data.roleName;
+                    viewModel.hourlySalary = data.hourlySalary;
 
 
-                    //    model.Add(viewModel);
-                    //}
+                    model.Add(viewModel);
                 }
-
             }
+
             return model.OrderBy(x => x.name).ToList();
         }
 
-        // POST: api/GetEmployee
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/GetEmployee/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/GetEmployee/5
-        public void Delete(int id)
-        {
-        }
+    
     }
 }

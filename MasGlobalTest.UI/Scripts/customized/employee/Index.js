@@ -59,8 +59,11 @@
             columns: [
                 { field: "id", title: "id", width: 40 },
                 { field: "name", title: "Fecha Ingreso", width: 150, },
-                { field: "salary", title: "Descripción", width: 140 },
-                { field: "create", title: "idUser", width: 140, format: "{0:dd/MM/yyyy HH:mm:ss}" },
+                { field: "roleDescription", title: "Descripción", width: 140 },
+                { field: "roleId", title: "Descripción", width: 140 },
+                { field: "roleName", title: "Descripción", width: 140 },
+                { field: "hourlySalary", title: "Descripción", width: 140 },
+                { field: "monthlySalary", title: "Descripción", width: 140 },
             ],
             editable: false,
             save: function (e) {

@@ -1,8 +1,12 @@
 ﻿using MasGlobalTest.DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,42 +20,33 @@ namespace MasGlobalTest.DataAccess.Repositories
 
             IEnumerable<Employess> members = null;
             string url = "http://masglobaltestapi.azurewebsites.net/swagger/#!/Employees/ApiEmployeesGet";
+            string urlParameters = "";// "?api_key=123";
 
-            using (var client = new HttpClient())
+            if (id != 0)
+                url = url + "/" + id;
+
+
+            var request = (HttpWebRequest)WebRequest.Create(url);
+
+            request.Method = "GET";
+            //request.UserAgent = RequestConstants.UserAgentValue;
+            request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
+
+            var content = string.Empty;
+
+            using (var response = (HttpWebResponse)request.GetResponse())
             {
-                if (id == 0)
-                    client.BaseAddress = new Uri(url);
-                else
+                using (var stream = response.GetResponseStream())
                 {
-                    url = url + "/" + id;
-                    client.BaseAddress = new Uri(url);
-                }
-
-                //Called Member default GET All records  
-                //GetAsync to send a GET request   
-                // PutAsync to send a PUT request  
-                var responseTask = client.GetAsync("member");
-                responseTask.Wait();
-
-                //To store result of web api response.   
-                var result = responseTask.Result;
-
-                //If success received   
-                if (result.IsSuccessStatusCode)
-                {
-                    var readTask = result.Content.ReadAsAsync<IList<Employess>>();
-                    readTask.Wait();
-
-                    members = readTask.Result;
-                }
-                else
-                {
-                    //Error response received   
-                    members = Enumerable.Empty<Employess>();
+                    using (var sr = new StreamReader(stream))
+                    {
+                        content = sr.ReadToEnd();
+                    }
                 }
             }
-            return members;
 
+            return null;
+                                   
         }
     }
 }
