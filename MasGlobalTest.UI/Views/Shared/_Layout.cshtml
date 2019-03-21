@@ -1,25 +1,33 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>@ViewBag.Title - My Kendo UI MVC Application</title>
-    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/kendo/2019.1.220/kendo.common-bootstrap.min.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/kendo/2019.1.220/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/kendo/2019.1.220/kendo.bootstrap.min.css")" rel="stylesheet" type="text/css" />
-    <script src="@Url.Content("~/Scripts/kendo/2019.1.220/jquery.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/kendo/2019.1.220/angular.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/kendo/2019.1.220/jszip.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/kendo/2019.1.220/kendo.all.min.js")"></script>
 
+    <script src="@Url.Content("~/Scripts/jquery-3.3.1.js")"></script>
+    @*<link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/kendo.compatibility.css" rel="stylesheet" />*@
+
+    <title>@ViewBag.Title - My Test - MVC Application</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
     @*Custom scripts*@
     <script src="~/Scripts/customized/employee/Index.js"></script>
 
+	<!--This CSS entry was added by the Telerik VS Extensions for compatibility reasons-->
+	<link href="@Url.Content("~/Content/kendo.compatibility.css")" rel="stylesheet" type="text/css" />
+	<link href="https://kendo.cdn.telerik.com/2019.1.220/styles/kendo.common-nova.min.css" rel="stylesheet" type="text/css" />
+	<link href="https://kendo.cdn.telerik.com/2019.1.220/styles/kendo.mobile.all.min.css" rel="stylesheet" type="text/css" />
+	<link href="https://kendo.cdn.telerik.com/2019.1.220/styles/kendo.nova.min.css" rel="stylesheet" type="text/css" />
+	<script src="https://kendo.cdn.telerik.com/2019.1.220/js/jquery.min.js"></script>
+	<script src="https://kendo.cdn.telerik.com/2019.1.220/js/angular.min.js"></script>
+	<script src="https://kendo.cdn.telerik.com/2019.1.220/js/jszip.min.js"></script>
+	<script src="https://kendo.cdn.telerik.com/2019.1.220/js/kendo.all.min.js"></script>
+	<script src="https://kendo.cdn.telerik.com/2019.1.220/js/kendo.aspnetmvc.min.js"></script>
+	<script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
 </head>
     <body>
         <header>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("Senior .NET Developer Hands On Test", "Index", "Home")</p>
+                    <p class="site-title">@Html.ActionLink("Senior .NET Developer Test", "Index", "Home")</p>
                 </div>
                 <div class="float-right">
                     <nav>
@@ -49,3 +57,37 @@
 		</footer>
     </body>
 </html>
+
+<script>
+    var rootUrl = '@Url.Content("~/")';
+    var user = '@User.Identity.Name';
+
+    var myWindow = $("#windowMessages"),
+        undo = $("#undo");
+
+    undo.click(function () {
+        myWindow.data("kendoWindow").open();
+        undo.fadeOut();
+    });
+
+    function onClose() {
+        undo.fadeIn();
+    }
+
+    myWindow.kendoWindow({
+        width: "600px",
+        title: "Mensaje Modulo Financiero",
+        visible: false,
+        actions: [
+            "Pin",
+            "Minimize",
+            "Maximize",
+            "Close"
+        ],
+        close: onClose
+    });
+
+    kendo.culture("en-CO");
+
+
+</script>
