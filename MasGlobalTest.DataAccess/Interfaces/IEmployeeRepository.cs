@@ -8,5 +8,6 @@ namespace MasGlobalTest.DataAccess.Interfaces
 {
     public interface IEmployeeRepository
     {
+        IEnumerable<Employess> ConsumeApi(int id);
     }
 }
