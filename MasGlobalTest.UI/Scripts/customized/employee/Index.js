@@ -57,13 +57,13 @@
                 fileName: "EmployeeList.pdf"
             },
             columns: [
-                { field: "id", title: "id", width: 40 },
-                { field: "name", title: "Fecha Ingreso", width: 150, },
-                { field: "roleDescription", title: "Descripción", width: 140 },
-                { field: "roleId", title: "Descripción", width: 140 },
-                { field: "roleName", title: "Descripción", width: 140 },
-                { field: "hourlySalary", title: "Descripción", width: 140 },
-                { field: "monthlySalary", title: "Descripción", width: 140 },
+                { field: "id", title: "Id", width: 40 },
+                { field: "name", title: "Name ", width: 150, },
+                { field: "roleDescription", title: "Rol Description", width: 140 },
+                { field: "roleId", title: "Rol Id", width: 140 },
+                { field: "roleName", title: "Rol Name", width: 140 },
+                { field: "hourlySalary", title: "HourlySalary", width: 140 },
+                { field: "monthlySalary", title: "Monthly Salary", width: 140 },
             ],
             editable: false,
             save: function (e) {
