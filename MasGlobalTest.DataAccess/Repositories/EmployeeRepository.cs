@@ -13,13 +13,13 @@ namespace MasGlobalTest.DataAccess.Repositories
     {
         public IEnumerable<Employess> ConsumeApi(int id)
         {
-            
+
             IEnumerable<Employess> members = null;
             string url = "http://masglobaltestapi.azurewebsites.net/swagger/#!/Employees/ApiEmployeesGet";
 
             using (var client = new HttpClient())
             {
-                if (id != 0)
+                if (id == 0)
                     client.BaseAddress = new Uri(url);
                 else
                 {
@@ -33,27 +33,25 @@ namespace MasGlobalTest.DataAccess.Repositories
                 var responseTask = client.GetAsync("member");
                 responseTask.Wait();
 
-                //    //To store result of web api response.   
-                //    var result = responseTask.Result;
+                //To store result of web api response.   
+                var result = responseTask.Result;
 
-                //    //If success received   
-                //    if (result.IsSuccessStatusCode)
-                //    {
-                //        var readTask = result.Content.ReadAsAsync<IList<Employess>>();
-                //        readTask.Wait();
+                //If success received   
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<IList<Employess>>();
+                    readTask.Wait();
 
-                //        members = readTask.Result;
-                //    }
-                //    else
-                //    {
-                //        //Error response received   
-                //        members = Enumerable.Empty<Employess>();
-                //    }
-                //}
-                // return members;
+                    members = readTask.Result;
+                }
+                else
+                {
+                    //Error response received   
+                    members = Enumerable.Empty<Employess>();
+                }
+            }
+            return members;
 
-                return null;
-          
         }
     }
 }
