@@ -1,5 +1,4 @@
 ﻿using MasGlobalTest.DataAccess.Interfaces;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +7,6 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Cryptography.Xml;
-using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,31 +25,21 @@ namespace MasGlobalTest.DataAccess.Repositories
             if (id != 0)
                 url = url + "/" + id;
 
-
+            // OK                                      
             var request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = WebRequestMethods.Http.Get;
+            request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
 
-            request.Method = "GET";
-            //request.UserAgent = RequestConstants.UserAgentValue;
-            request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
-
-            var content = string.Empty;
-
-            using (var response = (HttpWebResponse)request.GetResponse())
+            var response = request.GetResponse();
+            using (var reader = new StreamReader(response.GetResponseStream()))
             {
-                using (var stream = response.GetResponseStream())
-                {
-                    using (var sr = new StreamReader(stream))
-                    {
-                        content = sr.ReadToEnd();
-                    }
-                }
+                var json = reader.ReadToEnd();
+                // do stuffs...
             }
-
-
-            var releases = JArray.Parse(content);
-
+                                          
             return null;
-            
         }
     }
 }
